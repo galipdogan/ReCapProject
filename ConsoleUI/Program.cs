@@ -16,8 +16,18 @@ namespace ConsoleUI
             //{
             //    Console.WriteLine(car.CarName);
             //}
-            Car car = new Car { CarId = 5, BrandId = 1, ColorId = 2, CarName = "Hilux",ModelYear=2020,DailyPrice=100 };
-            carManager.Add(car);
+            Car car = new Car { CarId = 6, BrandId = 1, ColorId = 2, CarName = "Hilux",ModelYear=2020,DailyPrice=0 };
+
+            if (car.CarName.Length >= 2 && car.DailyPrice != 0)
+            {
+                carManager.Add(car);
+            }
+            else
+            {
+                Console.WriteLine("Lütefen Bilgileri kontrol ediniz");
+            }
+
+
 
         }
     }

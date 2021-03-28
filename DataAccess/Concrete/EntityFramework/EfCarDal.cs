@@ -15,12 +15,14 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (ReCapProjectContext context = new ReCapProjectContext())//Bu şekilde işi bitince bellekten atar
             {
-                if(entity.CarName.Length >2 && entity.DailyPrice!=0){ 
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges(); }
+                if (entity.CarName.Length > 2 && entity.DailyPrice != 0)
+                {
+                    var addedEntity = context.Entry(entity);
+                    addedEntity.State = EntityState.Added;
+                    context.SaveChanges();
+                }
 
-               
+
             }
         }
 
