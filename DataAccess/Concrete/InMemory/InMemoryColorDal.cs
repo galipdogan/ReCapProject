@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -34,9 +35,19 @@ namespace DataAccess.Concrete.InMemory
             _colors.Remove(colorToDelete);
         }
 
+        public Color Get(Expression<Func<Color, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Color> GetAll()
         {
             return _colors;
+        }
+
+        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Color color)

@@ -9,16 +9,16 @@ namespace Business.Concrete
 {
     public class ColorManager:IColorService
     {
-        IColorDal _iColorDal;
+        IColorDal _colorDal;
 
-        public ColorManager(IColorDal iColorDal)
+        public ColorManager(IColorDal colorDal)
         {
-            _iColorDal = iColorDal;
+            _colorDal = colorDal;
         }
 
         public List<Color> GetAll()
         {
-            throw new NotImplementedException();
+            return _colorDal.GetAll();
         }
     }
 }
