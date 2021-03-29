@@ -7,33 +7,32 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-   public class BrandManager:IBrandService
-   {
-       IBrandDal _iBrandDal;
+    public class BrandManager : IBrandService
+    {
+        IBrandDal _brandDal;
 
-       public BrandManager(IBrandDal iBrandDal)
-       {
-           _iBrandDal = iBrandDal;
-       }
-
-       public void Add(Car car)
-       {
-           throw new NotImplementedException();
-       }
-
-       public void Update(Car car)
-       {
-           throw new NotImplementedException();
-       }
-
-       public void Delete(Car car)
-       {
-           throw new NotImplementedException();
-       }
-
-       public List<Brand> GetAll()
+        public BrandManager(IBrandDal iBrandDal)
         {
-            return _iBrandDal.GetAll();
+            _brandDal = iBrandDal;
+        }
+        public void Add(Brand brand)
+        {
+            _brandDal.Add(brand);
+        }
+
+        public void Update(Brand brand)
+        {
+            _brandDal.Update(brand);
+        }
+
+        public void Delete(Brand brand)
+        {
+            _brandDal.Delete(brand);
+        }
+
+        public List<Brand> GetAll()
+        {
+            return _brandDal.GetAll();
         }
     }
 }
