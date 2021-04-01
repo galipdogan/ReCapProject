@@ -14,16 +14,16 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             // Car car = new Car {CarId = 5, BrandId = 1, ColorId = 2, CarName = "Hilux", ModelYear = 2020, DailyPrice = 100};
-            Rental rental = new Rental {CarId = 2, CustomerId = 4, RentDate = DateTime.Today, ReturnDate =DateTime.MaxValue};
-            rentalManager.Add(rental);
+            //Rental rental = new Rental {CarId = 2, CustomerId = 4, RentDate = DateTime.Today, ReturnDate =DateTime.MaxValue};
+            //rentalManager.Add(rental);
             //carManager.Add(car);
             // carManager.Update(car);
             //carManager.Delete(car);
-            //CarTestDetail();
+            CarTestDetail();
             
             //UserTest();
             //CustomerTest();
-            RentalDetailTest();
+            //RentalDetailTest();
         }
 
         private static void UserTest()
@@ -82,6 +82,19 @@ namespace ConsoleUI
                 Console.WriteLine(result.Message);
             }
 
+        }
+
+        private static void Car()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            var result = carManager.GetAll();
+            if (result.Success)
+            {
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName );
+                }
+            }
         }
     }
 }
