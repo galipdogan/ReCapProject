@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Entities.Concrete;
 
 namespace Business.Constants
 {
@@ -23,6 +24,21 @@ namespace Business.Constants
         public static string BrandUpdated = "Marka Güncellendi...";
         public static string BrandNameInValid = "Marka ismi geçersiz...";
         internal static string BrandListed = "Markalar Listelendi...";
+
+        public static string UserAdded = "Kullanıcı Eklendi...";
+        public static string UserDeleted = "Kullanıcı Silindi...";
+        public static string UserUpdated = "Kullanıcı Güncellendi...";
+        public static string UserNameInValid = "Kullanıcı ismi geçersiz...";
+        internal static string UserListed = "Kullanıcılar Listelendi...";
+
+        public static string RentAdded = "Kiralama Eklendi...";
+        public static string RentDeleted = "Kiralama Silindi...";
+        public static string RentUpdated = "KKiralamaullanıcı Güncellendi...";
+        public static string RentNameInValid = "Kiralama ismi geçersiz...";
+        internal static string RentListed = "Kiralamalar Listelendi...";
+        public static string RentInValid = "Kiralama Başarısız...";
+
+
 
         internal static string MaintenanceTime = "Sistem Bakımda...";
         
