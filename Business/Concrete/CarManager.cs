@@ -7,7 +7,9 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Linq;
 using Business.Constants;
-using Core.Utilities;
+using Business.ValidationRules.FluentValitadion;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Results;
 using Entities.Dtos;
 
 namespace Business.Concrete
@@ -17,19 +19,14 @@ namespace Business.Concrete
         ICarDal _carDal;
         public CarManager(ICarDal carDal)
         {
-
             _carDal = carDal;
         }
+
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.CarName.Length < 2 && car.DailyPrice>0)
-            {
-                //magic string
-                return new ErrorResult(Messages.CarNameInValid);
-            }
-
+            
             _carDal.Add(car);
-
             return new SuccessResult(Messages.CarAdded);
 
         }
@@ -70,7 +67,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
         }
-
-
+        
     }
 }
