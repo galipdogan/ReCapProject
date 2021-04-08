@@ -25,24 +25,24 @@ namespace Business.Concrete
             {
                 
                 _rentalDal.Add(rental);
-                return new SuccessResult(Messages.RentAdded);
+                return new SuccessResult(RentalMessages.RentAdded);
             }
             else
             {
-                return new ErrorResult(Messages.RentInValid);
+                return new ErrorResult(RentalMessages.RentInValid);
             }
         }
 
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
-            return new SuccessResult(Messages.RentUpdated);
+            return new SuccessResult(RentalMessages.RentUpdated);
         }
 
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
-            return new SuccessResult(Messages.RentDeleted);
+            return new SuccessResult(RentalMessages.RentDeleted);
         }
 
         public IDataResult<List<Rental>> GetAll()

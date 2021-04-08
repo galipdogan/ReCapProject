@@ -10,6 +10,7 @@ namespace Entities.Dtos
     {
 
         public int RentId { get; set; }
+        public string ImagePath { get; set; }
         public string CustomerName { get; set; }
         public string CompanyName { get; set; }
         public string CarName { get; set; }
