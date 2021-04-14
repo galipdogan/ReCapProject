@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Entities.Concrete
 {
@@ -14,5 +16,6 @@ namespace Entities.Concrete
         public int ModelYear { get; set; }
         public decimal DailyPrice { get; set; }
         public string Description { get; set; }
+        
     }
 }

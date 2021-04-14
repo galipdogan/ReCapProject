@@ -7,7 +7,7 @@ using Core.Entities;
 using DataAccess.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.DataAccess.EntitiyFramework
+namespace Core.DataAccess.EntityFramework
 {
    public class EfEntityRepositoryBase<TEntity, TDBContext> : IEntityRepository<TEntity>
         where TEntity : class,IEntity, new()

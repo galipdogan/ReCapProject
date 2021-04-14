@@ -95,6 +95,6 @@ namespace Business.Concrete
 
             return new List<CarImage> { new CarImage { CarId = carId, ImagePath = path, Date = DateTime.Now } };
         }
-
+        
     }
 }

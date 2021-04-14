@@ -1,5 +1,6 @@
 ﻿using System;
 using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -34,7 +35,7 @@ namespace ConsoleUI
                 FirstName = "Galip",
                 LastName = "Doğan",
                 EMail = "galipdogan@gmail.com",
-                Password = "1234"
+                //Password = "1234"
             };
             userManager.Add(user);
             userManager.GetAll();
