@@ -7,6 +7,7 @@ using Entities.Dtos;
 using System;
 using Business.Constants;
 using System.Text;
+using Core.Aspects.Autofac.Transaction;
 
 namespace Business.Concrete
 {
@@ -19,12 +20,20 @@ namespace Business.Concrete
             _userService = userService;
             _tokenHelper = tokenHelper;
         }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user,claims);
             return new SuccessDataResult<AccessToken>(accessToken, UserMessages.AccessTokenCreated);
         }
+
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {

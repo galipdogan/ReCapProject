@@ -15,6 +15,7 @@ using Core.Entities.Business;
 using Core.Utilities.Results;
 using Entities.Dtos;
 using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofac.Caching;
 
 namespace Business.Concrete
 {
@@ -27,6 +28,7 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
+
         [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
@@ -42,6 +44,8 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
+        
         public IResult Update(Car car)
         {
             IResult result = BusinessRules.Run(CheckIfCarNameExists(car.CarName));
