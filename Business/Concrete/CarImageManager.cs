@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.XPath;
 using Business.Abstract;
 using Business.CCS;
 using Business.Constants;
@@ -67,14 +68,22 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
-        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
+        public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == id));
+            List<CarImage> carImages = new List<CarImage>();
+            var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
+            if (result ==0)
+            {
+                CarImage c = new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = @"\images\default.jpg" };
+                carImages.Add(c);
+                return new SuccessDataResult<List<CarImage>>(carImages);
+            }
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
         }
 
-        private IResult CheckIfCarImageLimitExceded(int Carid)
+        private IResult CheckIfCarImageLimitExceded(int carId)
         {
-            var result = _carImageDal.GetAll(c => c.CarId == Carid).Count;
+            var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
             if (result > 5)
             {
                 return new ErrorResult(CarImageMessages.CarImageCountofCarImageError);
@@ -85,7 +94,7 @@ namespace Business.Concrete
 
         private List<CarImage> CheckIfAnyCarImageExists(int carId)
         {
-            string path = @"\images\DefaultCar.jpg";
+            string path = @"\images\default.jpg";
             var result = _carImageDal.GetAll(c => c.CarId == carId).Any();
 
             if (result)

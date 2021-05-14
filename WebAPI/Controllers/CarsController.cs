@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -18,10 +19,16 @@ namespace WebAPI.Controllers
         {
             _carService = carService;
         }
-
+        // bazı yerleri değiştireceğim.bu metodta list<car>dönüyor list<carforlistdto> şekline getireceğim?
+        //buradaki cardetail işimizi görmüyor mu? ayrıca mı yazmak gerekiyor içerisinden istediğim alanları alsam sadece olmuoyr mu?
+        // görür ama o ayrı bir dönüş türü olacak.istersen ona göre uyarlıyayım.zaten buraya gelecektik.
+        //peki hocam öyle yapalım 
+        // bize List<CarDetailDto> metodu lazım.aşağıdakileri bozmak istemiyorum yeni bir tane yazayım mı?
+        // tamam hocam öyle yapalım bende incelemiş olurum farenin pili bitti :) bi dk bi pil bulayım :) tamam hocam
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+            //Thread.Sleep(2000);
             var result = _carService.GetAll();
             if (result.Success)
             {
@@ -30,29 +37,74 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbybrandid")]
-        public IActionResult GetByBrandId(int id)
+        [HttpGet("getdetailsbycarid")]
+        public IActionResult GetCarDetailsByCarId(int carId)
         {
-            var result = _carService.GetCarsByBrandId(id);
+            var result = _carService.GetCarDetailsByCarId(carId);
             if (result.Success)
             {
-                return Ok(result.Data.ToList());
+                return Ok(result);
             }
             return BadRequest(result);
         }
 
-        [HttpGet("getbycolorid")]
-        public IActionResult GetCarsByColorId(int id)
+        [HttpGet("getdetailsbycolorid")]
+        public IActionResult GetCarDetailsByColorId(int colorId)
         {
-            var result = _carService.GetCarsByColorId(id);
+            var result = _carService.GetCarDetailsByColorId(colorId);
             if (result.Success)
             {
-                return Ok(result.Data.ToList());
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        
+        [HttpGet("getdetailsbybrandid")]
+        public IActionResult GetCarDetailsByBrandId(int brandId)
+        {
+            var result = _carService.GetCarDetailsByBrandId(brandId);
+            if (result.Success)
+            {
+                return Ok(result);
             }
             return BadRequest(result);
         }
 
-        [HttpGet("getbyuniteprice")]
+
+        [HttpGet("getcarsbybrandid")]
+        public IActionResult GetCarsByBrandId(int brandId)
+        {
+            var result = _carService.GetCarsByBrandId(brandId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarbycarid")]
+        public IActionResult GetCarByCarId(int carId)
+        {
+            var result = _carService.GetCarByCarId(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarsbycolorid")]
+        public IActionResult GetCarsByColorId(int colorId)
+        {
+            var result = _carService.GetCarsByColorId(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarsbyuniteprice")]
         public IActionResult GetByUnitPrice(decimal min, decimal max)
         {
             var result = _carService.GetByUnitPrice(min, max);
@@ -63,10 +115,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getdetail")]
-        public IActionResult GetCarDetail()
+        [HttpGet("getcardetails")]
+        public IActionResult GetCarDetails()
         {
-            var result = _carService.GetCarDetail();
+            var result = _carService.GetCarDetails();
             if (result.Success)
             {
                 return Ok(result);
@@ -74,6 +126,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getcardetailsbrandidandcolorid")]
+        public IActionResult GetCarDetails(int brandId, int colorId)
+        {
+            var result = _carService.GetCarsByBrandIdAndColorId(brandId,colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
         [HttpPost("add")]
         public IActionResult Add(Car car)
