@@ -52,6 +52,11 @@ namespace Business.Concrete
             return new SuccessResult(CarImageMessages.CarImageDeleted);
         }
 
+        public IDataResult<CarImage> GetByCarId(int carId)
+        {
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarId == carId));
+        }
+
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {

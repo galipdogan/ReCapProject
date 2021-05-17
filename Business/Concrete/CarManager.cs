@@ -22,11 +22,13 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
+        ICarImageService _carImageService;
         ILogger _logger;
         
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal, ICarImageService carImageService)
         {
             _carDal = carDal;
+            _carImageService = carImageService;
         }
 
         [SecuredOperation("car.add,admin")]
@@ -73,6 +75,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max), CarMessages.CarListed);
         }
 
+        public IDataResult<List<CarDetailsDto>> GetCarDetailsByBrandId(int branId)
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c => c.BrandId == branId));
+        }
+
         public IDataResult<List<CarDetailsDto>> GetCarDetailsByColorId(int colorId)
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId));
@@ -85,7 +92,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailsDto>> GetCarDetailsByCarId(int carId)
         {
-           return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c=>c.CarId==carId));
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c => c.CarId == carId));
         }
 
 
@@ -119,17 +126,7 @@ namespace Business.Concrete
 
             return new SuccessResult();
         }
-
-        public IDataResult<List<Car>> GetImagesByCarId(int carId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<List<CarDetailsDto>> GetCarDetailsByBrandId(int branId)
-        {
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c => c.BrandId== branId));
-        }
-
+       
         
     }
 }

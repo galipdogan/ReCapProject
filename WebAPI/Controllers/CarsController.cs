@@ -19,12 +19,6 @@ namespace WebAPI.Controllers
         {
             _carService = carService;
         }
-        // bazı yerleri değiştireceğim.bu metodta list<car>dönüyor list<carforlistdto> şekline getireceğim?
-        //buradaki cardetail işimizi görmüyor mu? ayrıca mı yazmak gerekiyor içerisinden istediğim alanları alsam sadece olmuoyr mu?
-        // görür ama o ayrı bir dönüş türü olacak.istersen ona göre uyarlıyayım.zaten buraya gelecektik.
-        //peki hocam öyle yapalım 
-        // bize List<CarDetailDto> metodu lazım.aşağıdakileri bozmak istemiyorum yeni bir tane yazayım mı?
-        // tamam hocam öyle yapalım bende incelemiş olurum farenin pili bitti :) bi dk bi pil bulayım :) tamam hocam
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
