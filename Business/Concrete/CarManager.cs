@@ -31,7 +31,7 @@ namespace Business.Concrete
             _carImageService = carImageService;
         }
 
-        [SecuredOperation("car.add,admin")]
+        //[SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
