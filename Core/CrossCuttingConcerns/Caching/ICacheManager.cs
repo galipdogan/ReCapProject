@@ -16,7 +16,7 @@ namespace Core.CrossCuttingConcerns.Caching
 
         void IsRemove(string key); //cache den kaldırma 
 
-        void RemoveByPattern(string pattern);//parametre olarak çalış örnek isminde get olan,isminde product,  regex pattern 
+        void RemoveByPattern(string pattern);//parametre olarak çalış örnek isminde get olan,isminde product,regex pattern 
 
     }
 }

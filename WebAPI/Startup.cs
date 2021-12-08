@@ -28,6 +28,8 @@ namespace WebAPI
 
             services.AddControllers();
             services.AddCors();
+            services.AddSwaggerDocument();
+        
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -73,12 +75,16 @@ namespace WebAPI
 
             app.UseAuthorization();
 
-            
+            app.UseOpenApi();
+
+            app.UseSwaggerUi3();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
+
+
     }
 }

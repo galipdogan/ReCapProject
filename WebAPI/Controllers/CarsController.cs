@@ -19,6 +19,10 @@ namespace WebAPI.Controllers
         {
             _carService = carService;
         }
+        /// <summary>
+        /// Get All Cars
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
