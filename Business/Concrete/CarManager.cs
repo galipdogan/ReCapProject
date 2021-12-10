@@ -16,6 +16,8 @@ using Core.Utilities.Results;
 using Entities.Dtos;
 using Business.BusinessAspects.Autofac;
 using Core.Aspects.Autofac.Caching;
+using System.Transactions;
+using Core.Aspects.Autofac.Transaction;
 
 namespace Business.Concrete
 {
@@ -31,8 +33,9 @@ namespace Business.Concrete
             _carImageService = carImageService;
         }
 
-        [SecuredOperation("car.add,admin")]
+        //[SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             IResult result = BusinessRules.Run(CheckIfCarNameExists(car.CarName));
@@ -46,7 +49,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
-        [CacheRemoveAspect("ICar.Get")]
+        [CacheRemoveAspect("ICarService.Get")]
         
         public IResult Update(Car car)
         {
@@ -90,6 +93,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(), CarMessages.CarListed);
         }
 
+        
         public IDataResult<List<CarDetailsDto>> GetCarDetailsByCarId(int carId)
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c => c.CarId == carId));
@@ -128,6 +132,19 @@ namespace Business.Concrete
             return new SuccessResult();
         }
        
-        
+        [TransactionScopeAspect]// Burada transaction ekledik araba ekleme yapildiginda calisir. 
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if (car.DailyPrice < 0)
+            {
+                throw new Exception("");
+            }
+
+            Add(car);
+
+
+            return null;
+        }
     }
 }

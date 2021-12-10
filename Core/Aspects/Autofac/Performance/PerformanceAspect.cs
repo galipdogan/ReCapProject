@@ -11,7 +11,7 @@ namespace Core.Aspects.Autofac.Performance
     public class PerformanceAspect : MethodInterception
     {
         private int _interval;
-        private Stopwatch _stopwatch;
+        private Stopwatch _stopwatch;//timer 
 
         public PerformanceAspect(int interval)
         {
